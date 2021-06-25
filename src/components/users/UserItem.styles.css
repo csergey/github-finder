@@ -1,0 +1,12 @@
+.card{
+    padding: 28px 96px;
+    border: 1px solid #eee;
+    border-radius: 7px;
+    margin: 10px;
+}
+
+.profile-img{
+    width:60px; 
+    height:60px;
+    border-radius: 36px;
+}
