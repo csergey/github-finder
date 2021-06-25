@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './search.styles.css';
 
@@ -7,6 +8,9 @@ class Search extends React.Component{
         searchText: ''
     };
 
+    static propTypes = {
+        searchUsers: PropTypes.func.isRequired
+    }
     changeSearchInputHandler = (e) => {
         this.setState({[e.target.name]: e.target.value});
     }
