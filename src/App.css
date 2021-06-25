@@ -27,8 +27,9 @@ ul{list-style: none;}
 img{width: 100%;}
 
 .container{
-  max-width: 1500px;
-  margin: auto;
+  /* max-width: 1500px;
+  margin: auto; */
+  margin: 0 75px;
   overflow: hidden;
   padding: 0 2rem;
 }

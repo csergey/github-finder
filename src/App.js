@@ -23,7 +23,7 @@ class App extends React.Component{
 
   searchUsers = async text => {
     if(text === ''){
-      alert('What we searching?');
+      alert('Search what ?');
       return;
     }
     this.setState({loading: true});
