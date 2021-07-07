@@ -6,3 +6,8 @@
 
 .bg-primary{background-color: #eee;}
 .fa-github{    margin-right: 10px;}
+
+.navbar ul li a{    
+    padding: 10px;
+    display: inline;
+    text-decoration: none;}

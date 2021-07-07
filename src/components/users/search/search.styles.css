@@ -1,9 +1,56 @@
 form input{width: 100%;padding: 5px;margin-top: 5px; border: 1px solid #eee;}
-form .submit-search{
-    width: 100%;
+.btn{cursor: pointer;  width: 100%;}
+form .submit-search.btn{
     padding: 10px;
     margin-top: 5px;    
     background-color: black;
     color: whitesmoke;
 }
 form .submit-search:hover{color:white;}
+.clear-page.btn{
+    padding: 10px;
+    margin-top: 5px;
+    background-color: whitesmoke;border:0;
+    color: black;}
+.clear2-page:hover{box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);} 
+.clear-page.hidden{display: none;}
+
+.alert.alert-light{
+    background-color: #c3bcc387;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 10px;
+    animation: fadeIn linear 2s;
+    animation: fadeIn linear 2s;
+    -webkit-animation: fadeIn linear 2s;
+    -moz-animation: fadeIn linear 2s;
+    -o-animation: fadeIn linear 2s;
+    -ms-animation: fadeIn linear 2s;
+}
+.alert.alert-light i{
+    margin-right: 10px;
+}
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }

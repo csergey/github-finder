@@ -9,19 +9,38 @@ class Search extends React.Component{
     };
 
     static propTypes = {
-        searchUsers: PropTypes.func.isRequired
+        searchUsers: PropTypes.func.isRequired,
+        showClearBtn: PropTypes.bool.isRequired,
+        setAlert: PropTypes.func.isRequired,
+        clearUsers: PropTypes.func
     }
+
     changeSearchInputHandler = (e) => {
         this.setState({[e.target.name]: e.target.value});
+
+        this.props.setAlert(null);
     }
 
     onSubmitSearch = (e) => {
         e.preventDefault();
-        this.props.searchUsers(this.state.searchText);
-        this.setState({text:''});
+
+        if(this.state.searchText === '') {
+            this.props.setAlert('Please enter something', 'light');
+        }else{
+            this.props.searchUsers(this.state.searchText);
+            //this.setState({searchText:''}); //Do not clear after search
+        }
+    }
+
+    clearUsersInput = () => {
+        this.setState({searchText: ""});
+        this.props.clearUsers();
     }
 
     render(){
+
+        const {showClearBtn} = this.props;
+
         return(
             <div>
                 <form className='form' onSubmit = {this.onSubmitSearch}>
@@ -39,6 +58,9 @@ class Search extends React.Component{
                         className='submit-search btn btn-dark btn-block'
                     />
                 </form>
+                <button type='button' className={`clear-page btn btn-light btn-block ${showClearBtn ? "":" hidden"}`}
+                    onClick={this.clearUsersInput}
+                >Clear</button>
             </div>
         );
     }

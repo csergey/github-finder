@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './UserItem.styles.css';
 
@@ -11,7 +12,10 @@ const UserItem = ({user: {avatar_url,login,html_url,blog}}) => {
              <h3 className='title'>{login}</h3>
              <p>{blog}</p>
              <div>
-                <a rel='noreferrer' href={html_url} target='_blank'><i className="fab fa-github-square btn-dark"></i></a>
+                <Link rel='noreferrer' to={`/user/${login}`} >{/* target='_blank' */}
+                    
+                    <i className="fab fa-github-square btn-dark"></i>  More
+                </Link>
              </div>
              
 
