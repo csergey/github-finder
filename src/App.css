@@ -29,7 +29,7 @@ img{width: 100%;}
 .container{
   /* max-width: 1500px;
   margin: auto; */
-  margin: 0 75px;
+  margin: 15px 75px;
   overflow: hidden;
   padding: 0 2rem;
 }
@@ -56,4 +56,17 @@ img{width: 100%;}
   text-align: center;
 }
 
-.card{padding: 1rem;}
+.card{display: flex;padding: 1rem;margin-top: 10px;}
+.card.grid-2{clear: both;}
+.btn.btn-light{background-color: #eee;    
+  text-align: center;
+    padding: 5px;
+  text-decoration: none;
+  color: black;}
+  a.back.btn.btn-light{width: 170px;float: left;}
+
+  .btn.btn-dark{background-color: rgb(24, 23, 23);    
+    text-align: center;
+      padding: 5px;
+    text-decoration: none;
+    color: white;}

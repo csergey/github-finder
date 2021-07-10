@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/navbar/Navbar';
 import Users from './components/users/Users';
@@ -40,7 +40,7 @@ class App extends React.Component{
   getUser = async (username) => {
     this.setState({loading: true });
 
-    const res =  await axios.get(
+    const res = await axios.get(
       `https://api.github.com/users/${username}`
     );
     this.setState({user: res.data, loading: false});
