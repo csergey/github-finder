@@ -29,10 +29,7 @@ class App extends React.Component{
   // }
 
   searchUsers = async text => {
-    // if(text === ''){
-    //   alert('Search what ?');
-    //   return;
-    // }
+    // if(text === ''){//   alert('Search what ?');//   return;// }
 
     this.setState({loading: true});   
     const res = await axios.get(`https://api.github.com/search/users?q=${text}`);
