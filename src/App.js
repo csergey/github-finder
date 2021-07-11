@@ -15,11 +15,13 @@ import axios from 'axios';
 class App extends React.Component{
   state = {
     users:[],
+    repos:[],
     user:{},
     loading:false,
     alert: null
   }
 
+  //Get all users by default
   // async componentDidMount(){
   //   this.setState({loading: true});
   //   const res = await axios.get('https://api.github.com/users');
@@ -46,6 +48,15 @@ class App extends React.Component{
     this.setState({user: res.data, loading: false});
   }
 
+  getUserRepos = async (username) => {
+    this.setState({loading: true });
+
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`
+    );
+    this.setState({repos: res.data, loading: false});
+  }
+
   clearUsers = () => this.setState({users:[], loading: false});
 
   setAlert = ( msg, type ) => {
@@ -62,7 +73,7 @@ class App extends React.Component{
 
    render(){
 
-    const {users, user, loading} = this.state;
+    const {users, user, repos, loading} = this.state;
 
     return (
       <Router>
@@ -88,11 +99,19 @@ class App extends React.Component{
             </Route>
             <Route exact path='/about' component={About}/>
             <Route exact path='/user/:login' render={props => (
-              <User {...props} getUser={this.getUser} user={user} loading={loading}/>
+              <User 
+                {...props} 
+                getUser={this.getUser} 
+                getUserRepos={this.getUserRepos} 
+                user={user} 
+                repos={repos}
+                loading={loading}
+                />
             )}/>
           </Switch>
 
           </div>
+          
         </React.Fragment>
       </Router>
     );
