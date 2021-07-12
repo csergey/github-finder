@@ -9,12 +9,10 @@ const Users = ({users, loading}) => {
     }else{
     return(
         <div className='cards-container' style={userStyle}>
-            {
-                users.map(user=>(<UserItem key={user.id} user={user} />))
-            }
+            {users.map(user=>(<UserItem key={user.id} user={user} />))}
         </div>
     );
-}
+    }
 }
 
 Users.propTypes ={

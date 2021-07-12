@@ -9,7 +9,6 @@ class User extends React.Component{
 
     async componentDidMount(){
     this.setState({loading: true});
-    //const res = await axios.get('https://api.github.com/users');
     this.props.getUser(this.props.match.params.login);
     this.props.getUserRepos(this.props.match.params.login);
     this.setState({loading: false});
@@ -25,8 +24,19 @@ class User extends React.Component{
 
     render(){
 
-        const {name, avatar_url, location,bio,blog,login,html_url,followers,following,
-                public_repos,public_gists,hireable,company} = this.props.user;
+        const {name, 
+                avatar_url, 
+                location,
+                bio,
+                blog,
+                login,
+                html_url,
+                followers,
+                following,
+                public_repos,
+                public_gists,
+                hireable,
+                company} = this.props.user;
         const {loading,repos} = this.props;
 
         if(loading) return <Spinner/>
@@ -35,16 +45,20 @@ class User extends React.Component{
             <React.Fragment>
 
                 <Link to='/' className='btn btn-light back'>
-                  Back To Search
+                  Back
                 </Link>
 
-                <div className='card grid-2'>
+                <div className='user-main-info card grid-2'>
                   <div className='all-center'>
                     <img src={avatar_url} alt='avatar' className='round-img user-avatar' 
                       style={{width:'170px'}}/>
                   
-
-                    <h1>Name: {name}</h1>
+                    {name && (
+                      <React.Fragment>
+                          <h1>Name: {name}</h1>
+                      </React.Fragment>
+                    )}
+                    
                     <div>
                       Hireable:{' '}
                       {hireable ? <i className='fas fa-check text-success'/> 

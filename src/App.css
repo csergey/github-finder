@@ -56,7 +56,12 @@ img{width: 100%;}
   text-align: center;
 }
 
-.card{display: flex;padding: 1rem;margin-top: 10px;}
+.card{
+  /* display: flex; */
+  padding: 1rem;margin-top: 10px;}
+
+.card.user-main-info{border:0;}
+
 .card.grid-2{clear: both;}
 .btn.btn-light{background-color: #eee;    
   text-align: center;

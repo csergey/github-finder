@@ -1,6 +1,5 @@
 .user img.user-avatar{width: 200px;height: 200px;float:left;margin-right: 35px;}
 
 .round-img{border-radius: 75px;}
-.all-center{text-align: center;}
 .grid-1{display: flex;flex: 1;}
 .grid-2{display: flex;flex: 2;}
