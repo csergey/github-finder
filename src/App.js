@@ -1,6 +1,6 @@
 
 import './App.css';
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/navbar/Navbar';
 import Users from './components/users/Users';
@@ -12,65 +12,54 @@ import About from './components/pages/About';
 
 import axios from 'axios';
 
-class App extends React.Component{
-  state = {
-    users:[],
-    repos:[],
-    user:{},
-    loading:false,
-    alert: null
-  }
+const App = () => {
 
-  //Get all users by default
-  // async componentDidMount(){
-  //   this.setState({loading: true});
-  //   const res = await axios.get('https://api.github.com/users');
-  //   this.setState({loading: false, users: res.data});
-  // }
+  const [users,setUsers] = useState([]);
+  const [repos,setRepos] = useState([]);
+  const [user,setUser] = useState({});
+  const [loading,setLoading] = useState(false);
+  const [alert,setAlert] = useState(null);
 
-  searchUsers = async text => {
+
+  const searchUsers = async text => {
     // if(text === ''){//   alert('Search what ?');//   return;// }
-
-    this.setState({loading: true});   
+    setLoading(true);   
     const res = await axios.get(`https://api.github.com/search/users?q=${text}`);
-    this.setState({loading: false, users: res.data.items});
-  }
+    setUsers(res.data.items);
+    setLoading(false);
+  };
 
-  getUser = async (username) => {
-    this.setState({loading: true });
+  const getUser = async (username) => {
+    setLoading(true);
+    const res = await axios.get(`https://api.github.com/users/${username}`);
+    setUser(res.data);
+    setLoading(false);
+  };
 
-    const res = await axios.get(
-      `https://api.github.com/users/${username}`
-    );
-    this.setState({user: res.data, loading: false});
-  }
+  const getUserRepos = async (username) => {
+    setLoading(true);
+    const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`);
+    setRepos(res.data);
+    setLoading(false);
+    
+  };
 
-  getUserRepos = async (username) => {
-    this.setState({loading: true });
+  const clearUsers = () => {
+    setUsers([]);
+    setLoading(false);
+  };
 
-    const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc`
-    );
-    this.setState({repos: res.data, loading: false});
-  }
-
-  clearUsers = () => this.setState({users:[], loading: false});
-
-  setAlert = ( msg, type ) => {
+  const showAlert = ( msg, type ) => {
 
     if(msg === null)
-      this.setState({alert: null});
+      setAlert(null);
     else
-      this.setState({alert: {msg, type}});
+      setAlert({msg, type});
     
     //option#1
-    setTimeout(()=>this.setState({alert: null}),6000);
+    setTimeout(()=>setAlert(null),6000);
     //option#2 close on search keyup
-  }
-
-   render(){
-
-    const {users, user, repos, loading} = this.state;
+  };
 
     return (
       <Router>
@@ -82,13 +71,13 @@ class App extends React.Component{
 
             <Route exact path='/' render={props => (
               <React.Fragment>
-                <Search searchUsers={this.searchUsers} 
-                    clearUsers={this.clearUsers} 
-                    setAlert={this.setAlert}
+                <Search searchUsers={searchUsers} 
+                    clearUsers={clearUsers} 
+                    setAlert={showAlert}
                     showClearBtn={users.length > 0}
                     
                 />
-                <Alert alert={this.state.alert}/>
+                <Alert alert={alert}/>
 
                 <Users loading={loading} users={users}/>
               </React.Fragment>
@@ -98,8 +87,8 @@ class App extends React.Component{
             <Route exact path='/user/:login' render={props => (
               <User 
                 {...props} 
-                getUser={this.getUser} 
-                getUserRepos={this.getUserRepos} 
+                getUser={getUser} 
+                getUserRepos={getUserRepos} 
                 user={user} 
                 repos={repos}
                 loading={loading}
@@ -112,7 +101,6 @@ class App extends React.Component{
         </React.Fragment>
       </Router>
     );
-  }
   
 }
 
